@@ -37,13 +37,16 @@ export default function Login({ navigation }) {
     <View style={styles.container}>
       <View style={styles.content}>
         <View style={styles.circle}>
-          <Image style={styles.img} source={{ uri: 'https://via.placeholder.com/40' }} />
+        <Image 
+          style={styles.img}
+          source = {require('../assets/images.jpg')} />
+
         </View>
         <Text style={{ marginTop: 16 }}>Your Email?</Text>
 
         <View style={styles.inputContainer}>
-          <TextInput style={styles.input} onChangeText={(txt) => setEmail(txt)} placeholder="Enter your email" />
-          <TextInput style={styles.input} onChangeText={(txt) => setPassword(txt)} placeholder="Enter your password" />
+          <TextInput  onChangeText={(txt) => setEmail(txt)} placeholder="Enter your email" />
+          <TextInput  onChangeText={(txt) => setPassword(txt)} placeholder="Enter your password" />
         </View>
       </View>
       {
@@ -65,14 +68,52 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
   },
-  footer: { width: '50%', flexDirection: 'row', justifyContent: 'space-between', marginRight: 16 },
-  content: { padding: 16, alignItems: 'center', width: '100%' },
-  inputContainer: { marginTop: 32, alignSelf: 'flex-start' },
-  input: { textAlign: 'left', marginTop: 16 },
-  circle: { backgroundColor: 'blue', width: 80, height: 80, borderRadius: 50, justifyContent: 'center', alignItems: 'center', marginTop: 64 },
-  img: { width: 40, height: 40 },
-  btn: { flexDirection: 'row', backgroundColor: 'black', color: 'white', position: 'absolute', height: 40, width: '100%', bottom: 0, alignItems: 'center', justifyContent: 'flex-end' },
-  btnTxt: { color: 'white' },
-  arrow: { color: 'white' }
+  footer: { 
+    width: '50%',
+    flexDirection: 'row',
+    justifyContent: 'space-between', 
+    marginRight: 16
+
+     },
+  content: { 
+    padding: 16, 
+    alignItems: 'center',
+    width: '100%' 
+  },
+
+  inputContainer: {
+     marginTop: 32,
+     alignSelf: 'flex-start',
+
+    },
+  circle: { 
+    backgroundColor: '#00BFFF',
+    width: 80,
+    height: 80,
+    borderRadius: 50, 
+    justifyContent: 'center',
+    alignItems: 'center', 
+    marginTop: 64,
+       },
+  img: {
+     width: 50,
+     height: 40 },
+  btn: {
+     flexDirection: 'row', 
+     backgroundColor: 'black', 
+     color: 'white',
+     position: 'absolute',
+     height: 40, 
+     width: '100%',
+     bottom: 0, 
+     alignItems: 'center', 
+     justifyContent: 'flex-end' },
+  btnTxt: { 
+    color: 'white'
+ },
+
+  arrow: { 
+    color: 'white'
+ }
 
 });

@@ -13,7 +13,6 @@ function Navigation() {
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Home" options={{header: ()=>null}} component={Home} />
         <Stack.Screen name="Calendar" options={{header: ()=>null}} component={Calendar} />
-
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -3,6 +3,8 @@ import { StyleSheet, View, Text } from "react-native";
 import moment from "moment";
 import DateRangePicker from "react-native-daterange-picker";
 import firebase from '../config/firebase'
+import { TouchableOpacity } from "react-native-gesture-handler";
+
 export default class App extends React.Component {
   constructor(props) {
     super(props);
@@ -14,20 +16,31 @@ export default class App extends React.Component {
   }
 
   setDates = (dates) => {
-    // firebase.database().ref('date/').set({start: dates.startDate, endDate: dates.endDate})
-    // .then(()=> {
-
-        
-    // })
+    
     this.setState({
-        ...dates,
-      });
+      ...dates,
+    });
   };
 
+  onSubmit = ()=> {
+    let {startDate, endDate} =this.state
+
+    if(!endDate) return
+
+    firebase.database()
+    .ref('dates/')
+    .set({startDate: startDate.toString(), endDate: endDate.toString()})
+    .then((e)=>this.props.navigation.pop())
+      .catch((e)=>console.log(e))
+  }
+
   render() {
+    console.log(this.navigation)
     const { startDate, endDate, displayedDate } = this.state;
+    
     return (
       <View style={styles.container}>
+        <Text>{startDate&&startDate.toString()} - {endDate&&endDate.toString()}</Text>
         <DateRangePicker
           onChange={this.setDates}
           endDate={endDate}
@@ -35,8 +48,14 @@ export default class App extends React.Component {
           displayedDate={displayedDate}
           range
         >
-          <Text>Click me!</Text>
+          <View style={styles.btn}>
+            <Text style={styles.btnText}>Open Calendar</Text>
+          </View>
         </DateRangePicker>
+
+        <TouchableOpacity onPress={()=> this.onSubmit()} style={styles.btn}>
+          <Text style={styles.btnText}>Save Date</Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -49,4 +68,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  btn: {
+    width: 150,
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#00BFFF',
+    borderRadius: 10,
+    marginTop: 32
+  },
+  btnText: {
+    color: 'white'
+  }
 });
